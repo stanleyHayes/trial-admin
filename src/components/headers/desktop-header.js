@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Avatar, Button, Grid, makeStyles, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
-import {Face, KeyboardArrowDown} from "@material-ui/icons";
+import {Dashboard, Edit, ExitToApp, Face, KeyboardArrowDown, Lock} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 
 const DesktopHeader = () => {
@@ -8,9 +8,7 @@ const DesktopHeader = () => {
     const useStyles = makeStyles(theme => {
         return {
             toolbar: {},
-            profileButton: {
-
-            },
+            profileButton: {},
             brand: {
                 textTransform: 'uppercase'
             },
@@ -75,6 +73,32 @@ const DesktopHeader = () => {
                                     Profile
                                 </Button>
                             </Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to="/dashboard" className={classes.link}>
+                                <Button variant="text" startIcon={<Dashboard/>}>
+                                    Dashboard
+                                </Button>
+                            </Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to="/edit-profile" className={classes.link}>
+                                <Button variant="text" startIcon={<Edit/>}>
+                                    Edit Profile
+                                </Button>
+                            </Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to="/auth/change-password" className={classes.link}>
+                                <Button variant="text" startIcon={<Lock/>}>
+                                    Change Password
+                                </Button>
+                            </Link>
+                        </MenuItem>
+                        <MenuItem>
+                            <Button variant="text" startIcon={<ExitToApp/>}>
+                                Logout
+                            </Button>
                         </MenuItem>
                     </Menu>
                 </Grid>

@@ -8,6 +8,8 @@ import {createTheme} from '@material-ui/core/styles';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const theme = createTheme({
     typography: {
@@ -18,7 +20,7 @@ const theme = createTheme({
         primary: {
             main: '#ffffff'
         },
-        secondary:{
+        secondary: {
             main: '#f06680'
         },
         action: {
@@ -30,20 +32,21 @@ const theme = createTheme({
         }
     },
     shape: {
-        borderRadius: 48
+        borderRadius: 24
     }
 });
 
-
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
-                <ThemeProvider theme={theme}>
-                    <App/>
-                </ThemeProvider>
-            </Provider>
-        </BrowserRouter>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <ThemeProvider theme={theme}>
+                        <App/>
+                    </ThemeProvider>
+                </Provider>
+            </BrowserRouter>
+        </MuiPickersUtilsProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

@@ -18,7 +18,8 @@ const Layout = ({children}) => {
         return {
             content: {
                 backgroundColor: theme.palette.background.default,
-                paddingTop: 64
+                paddingTop: 64,
+                minHeight: '100vh'
             },
             root: {
                 minHeight: '100vh'
@@ -31,16 +32,17 @@ const Layout = ({children}) => {
     return (
         <React.Fragment>
             <div className={classes.root}>
-                <div>
-                    <Header handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleCloseDrawer}/>
-                </div>
-                <Grid container={true} className={classes.root}>
+                <Header
+                    handleDrawerOpen={handleDrawerOpen}
+                    handleDrawerClose={handleCloseDrawer}
+                />
+                <Grid container={true}>
                     <Hidden smDown={true}>
                         <Grid item={true} md={3} lg={2}>
                             <DrawerContent/>
                         </Grid>
                     </Hidden>
-                    <Grid className={classes.content} item={true} md={9} lg={10}>
+                    <Grid className={classes.content} xs={12} item={true} md={9} lg={10}>
                         {children}
                     </Grid>
                 </Grid>
