@@ -3,12 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ThemeProvider} from "@material-ui/core";
+import {createTheme} from '@material-ui/core/styles';
+import {BrowserRouter} from "react-router-dom";
+
+const theme = createTheme({
+    typography: {
+        fontFamily: 'Raleway'
+    },
+    palette: {
+        type: 'light',
+        background: {
+            default: 'rgba(229,229,229,0.85)'
+        }
+    }
+});
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <App/>
+            </ThemeProvider>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
