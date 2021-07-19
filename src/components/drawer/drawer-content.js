@@ -26,7 +26,7 @@ const DrawerContent = () => {
 
     return (
         <Container className={classes.root}>
-            <Link className={classes.link} to="/coupons">
+            <Link className={classes.link} to="/">
                 <Button className={classes.button} variant="text" startIcon={<Dashboard />}>
                     Dashboard
                 </Button>

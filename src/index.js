@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {ThemeProvider} from "@material-ui/core";
 import {createTheme} from '@material-ui/core/styles';
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 const theme = createTheme({
     typography: {
@@ -13,9 +15,22 @@ const theme = createTheme({
     },
     palette: {
         type: 'light',
+        primary: {
+            main: '#ffffff'
+        },
+        secondary:{
+            main: '#f06680'
+        },
+        action: {
+            active: '#e73d8e'
+        },
         background: {
-            default: 'rgba(229,229,229,0.85)'
+            default: 'rgba(229,229,229,0.85)',
+            paper: '#ffffff'
         }
+    },
+    shape: {
+        borderRadius: 48
     }
 });
 
@@ -23,9 +38,11 @@ const theme = createTheme({
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                <App/>
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <App/>
+                </ThemeProvider>
+            </Provider>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
