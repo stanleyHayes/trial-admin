@@ -11,7 +11,9 @@ const ForgotPasswordPage = () => {
         return {
             container: {
                 backgroundColor: theme.palette.background.default,
-                minHeight: '100vh'
+                minHeight: '100vh',
+                paddingTop: 32,
+                paddingBottom: 32
             },
             textField: {
                 marginTop: 8,

@@ -22,7 +22,9 @@ const ResetPasswordPage = () => {
         return {
             container: {
                 backgroundColor: theme.palette.background.default,
-                minHeight: '83vh'
+                minHeight: '83vh',
+                paddingTop: 32,
+                paddingBottom: 32
             },
             textField: {
                 marginTop: 8,
