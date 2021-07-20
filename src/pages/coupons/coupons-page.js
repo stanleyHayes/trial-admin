@@ -164,6 +164,7 @@ const CouponsPage = () => {
     }
 
     const [status, setStatus] = useState("All");
+
     const handleStatusChange = event => {
         setStatus(event.target.value);
     }
