@@ -8,7 +8,9 @@ const DesktopHeader = () => {
     const useStyles = makeStyles(theme => {
         return {
             toolbar: {},
-            profileButton: {},
+            profileButton: {
+
+            },
             brand: {
                 textTransform: 'uppercase'
             },
@@ -43,10 +45,11 @@ const DesktopHeader = () => {
         <Toolbar className={classes.toolbar} variant="regular">
             <Grid container={true} alignItems="center" justifyContent="space-around">
                 <Grid item={true}>
-                    <Typography className={classes.brand} variant="h4">VienHealth</Typography>
+                    <Typography color="secondary" className={classes.brand} variant="h4">VienHealth</Typography>
                 </Grid>
                 <Grid item={true}>
                     <Button
+                        color="secondary"
                         onClick={handleMoreClick}
                         startIcon={
                             <Avatar className={classes.avatar}>

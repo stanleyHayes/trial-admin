@@ -8,7 +8,9 @@ import {
     Grid,
     LinearProgress,
     makeStyles,
+    MenuItem,
     Paper,
+    Select,
     Table,
     TableBody,
     TableCell,
@@ -19,7 +21,7 @@ import {
     TableRow,
     Typography
 } from "@material-ui/core";
-import {Add, Delete, Edit, FormatListBulleted, Visibility} from "@material-ui/icons";
+import {Add, Delete, Edit, Visibility} from "@material-ui/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {brown, green, grey, red} from "@material-ui/core/colors";
 import {Alert} from "@material-ui/lab";
@@ -146,16 +148,36 @@ const CouponsPage = () => {
         setPage(newPage);
     }
 
+    const [status, setStatus] = useState("");
+    const handleStatusChange = event => {
+        setStatus(event.target.value);
+    }
+
     return (
         <Layout>
             <Container className={classes.container}>
                 {loading && <LinearProgress variant="query"/>}
                 {error && <Alert variant="outlined" title="Error">{error}</Alert>}
                 <Grid container={true} justifyContent="space-between" alignItems="center" spacing={3}>
-                    <Grid item={true} xs={12} md={8} lg={10}>
+                    <Grid item={true} xs={12} md={4} lg={8}>
                         <Typography className={classes.title} color="textSecondary" variant="h4">
                             Coupons ({coupons && coupons.length})
                         </Typography>
+                    </Grid>
+                    <Grid item={true} xs={12} md={4} lg={2}>
+                        <Select
+                            label="Select Status"
+                            margin="dense"
+                            fullWidth={true}
+                            variant="outlined"
+                            onChange={handleStatusChange}
+                            defaultValue="All"
+                            value={status}>
+                            <MenuItem value="All">Select Status</MenuItem>
+                            <MenuItem value="inactive">Inactive</MenuItem>
+                            <MenuItem value="active">Active</MenuItem>
+                            <MenuItem value="expired">Expired</MenuItem>
+                        </Select>
                     </Grid>
                     <Grid item={true} xs={12} md={4} lg={2}>
                         <Button
@@ -208,9 +230,6 @@ const CouponsPage = () => {
                                                         <Visibility
                                                             onClick={() => handleSelectedItem(coupon)}
                                                             className={classes.viewIcon}/>
-                                                    </Grid>
-                                                    <Grid item={true}>
-                                                        <FormatListBulleted className={classes.usedIcon}/>
                                                     </Grid>
                                                     <Grid item={true}>
                                                         <Edit

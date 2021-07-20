@@ -18,10 +18,10 @@ const theme = createTheme({
     palette: {
         type: 'light',
         primary: {
-            main: '#ffffff'
+            main: '#123148'
         },
         secondary: {
-            main: '#f06680'
+            main: '#e73d8e'
         },
         action: {
             active: '#e73d8e'

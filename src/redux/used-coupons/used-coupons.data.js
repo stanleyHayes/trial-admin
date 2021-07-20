@@ -14,8 +14,8 @@ export const usedCoupons = [
             name: 'Stanley Hayford',
             email: 'hayfordstanley@gmail.com',
             _id: 1
-        }
-
+        },
+        createdAt: '01-01-2021',
     },
     {
         coupon: {
@@ -31,7 +31,8 @@ export const usedCoupons = [
             name: 'Antoinette Dewortor',
             email: 'antoinette.dewortor@acity.edu.gh',
             _id: 2
-        }
+        },
+        createdAt: '01-01-2021',
 
     },
     {
@@ -48,6 +49,7 @@ export const usedCoupons = [
             name: 'Florence Kyei-Baffour',
             email: 'phlorince1998@gmail.com',
             _id: 3
-        }
+        },
+        createdAt: '01-01-2021',
     }
 ];
