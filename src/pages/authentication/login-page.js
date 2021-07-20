@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
-    Avatar,
     Button,
     Card,
     CardContent,
@@ -63,7 +62,7 @@ const LoginPage = () => {
                 width: 100,
                 height: 100
             },
-            subtitle:{
+            subtitle: {
                 marginBottom: 16
             },
         }
@@ -94,8 +93,8 @@ const LoginPage = () => {
             setHasError(true);
         }
 
-        if (!email) {
-            setError({...error, email: "Field required"});
+        if (!password) {
+            setError({...error, password: "Field required"});
             setHasError(true);
         }
         if (hasError) {
@@ -108,6 +107,13 @@ const LoginPage = () => {
     const handleShowPassword = () => {
         setVisible(!visible);
     }
+
+    const {token} = useSelector(state => state.auth);
+    useEffect(() => {
+        if (!loading && token) {
+            history.push('/');
+        }
+    }, [history, loading, token]);
 
     return (
         <div className={classes.container}>

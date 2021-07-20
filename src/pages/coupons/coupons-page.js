@@ -31,6 +31,7 @@ import DeleteDialog from "../../components/shared/delete-dialog";
 import ViewCouponDetailDialog from "../../components/modals/coupons/view-coupon-detail-dialog";
 import {getCoupons} from "../../redux/coupons/coupons-action-creators";
 import UpdateCouponDialog from "../../components/modals/coupons/update-coupon-dialog";
+import {useHistory} from "react-router-dom";
 
 const CouponsPage = () => {
     const useStyles = makeStyles(theme => {
@@ -73,7 +74,7 @@ const CouponsPage = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const {token} = useSelector(state => state.auth);
+    const {token, loading: authLoading} = useSelector(state => state.auth);
 
     useEffect(() => {
         dispatch(getCoupons(token));
@@ -148,10 +149,18 @@ const CouponsPage = () => {
         setPage(newPage);
     }
 
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState("All");
     const handleStatusChange = event => {
         setStatus(event.target.value);
     }
+
+    const history = useHistory();
+
+    useEffect(() => {
+        if(!authLoading && !token){
+            history.push('/auth/login');
+        }
+    }, [history, authLoading, token]);
 
     return (
         <Layout>

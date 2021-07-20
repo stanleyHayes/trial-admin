@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "../../components/layout/layout";
 import {
     Avatar,
@@ -107,6 +107,12 @@ const ChangePasswordPage = () => {
     const handleShowPassword = () => {
         setVisible(!visible);
     }
+
+    useEffect(() => {
+        if(!loading && !token){
+            history.push('/auth/login');
+        }
+    }, [history, loading, token]);
 
 
     return (

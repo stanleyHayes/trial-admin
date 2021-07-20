@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Layout from "../../components/layout/layout";
 import {Container, makeStyles, Typography} from "@material-ui/core";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 const DashboardPage = () => {
     const useStyles = makeStyles(theme => {
@@ -15,6 +17,14 @@ const DashboardPage = () => {
     });
 
     const classes = useStyles();
+    const history = useHistory();
+
+    const {token, loading} = useSelector(state => state.auth);
+    useEffect(() => {
+        if(!loading && !token){
+            history.push('/auth/login');
+        }
+    }, [history, loading, token]);
 
     return (
         <Layout>

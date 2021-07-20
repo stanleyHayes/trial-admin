@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Avatar, Button, Grid, makeStyles, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
 import {Dashboard, Edit, ExitToApp, Face, KeyboardArrowDown, Lock} from "@material-ui/icons";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const DesktopHeader = () => {
 
@@ -31,6 +32,8 @@ const DesktopHeader = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openMenu, setOpenMenu] = useState(false);
 
+    const {user} = useSelector(state => state.auth);
+
     const handleMoreClick = event => {
         setOpenMenu(true);
         setAnchorEl(event.currentTarget);
@@ -39,6 +42,16 @@ const DesktopHeader = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
         setOpenMenu(false);
+    }
+
+    const getInitials = name => {
+        const names = name.split(' ');
+        if(names.length === 0)
+            return 'U'
+        else if(name.length === 1)
+            return names[0][0];
+        else if(names.length === 2)
+            return `${names[0][0]}${names[1][0]}`
     }
 
     return (
@@ -54,13 +67,13 @@ const DesktopHeader = () => {
                         startIcon={
                             <Avatar className={classes.avatar}>
                                 <Typography className={classes.initials} variant="h6" align="center">
-                                    SH
+                                    {user && getInitials(user.name)}
                                 </Typography>
                             </Avatar>}
                         endIcon={<KeyboardArrowDown/>}
                         variant="outlined"
                         className={classes.profileButton}>
-                        Stanley Hayford
+                        {user && user.name}
                     </Button>
                     <Menu
                         fullWith={true}

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "../../components/layout/layout";
 import {
     Box,
@@ -6,17 +6,26 @@ import {
     Divider,
     Grid,
     LinearProgress,
-    makeStyles, MenuItem,
-    Paper, Select, Table, TableBody, TableCell,
-    TableContainer, TableFooter, TableHead, TablePagination, TableRow,
+    makeStyles,
+    MenuItem,
+    Paper,
+    Select,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableFooter,
+    TableHead,
+    TablePagination,
+    TableRow,
     Typography
 } from "@material-ui/core";
 import {brown, green, grey, red} from "@material-ui/core/colors";
 import {Alert} from "@material-ui/lab";
 import {useSelector} from "react-redux";
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import moment from "moment";
-import {Delete, Edit, Info, Visibility} from "@material-ui/icons";
+import {Delete, Edit, Visibility} from "@material-ui/icons";
 
 
 const UsedCouponsPage = () => {
@@ -78,6 +87,15 @@ const UsedCouponsPage = () => {
     const handleCouponSelect = coupon => {
         setSelectedCoupon(coupon);
     }
+
+    const history = useHistory();
+
+    const {token, loading: authLoading} = useSelector(state => state.auth);
+    useEffect(() => {
+        if (!authLoading && !token) {
+            history.push('/auth/login');
+        }
+    }, [authLoading, history, token]);
 
     return (
         <Layout>

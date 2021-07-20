@@ -10,6 +10,8 @@ import {
     Typography
 } from "@material-ui/core";
 import {DatePicker} from "@material-ui/pickers";
+import {useDispatch, useSelector} from "react-redux";
+import {createCoupon} from "../../../redux/coupons/coupons-action-creators";
 
 const CreateCouponDialog = ({openCouponDialog, handleCouponDialogClose}) => {
 
@@ -34,42 +36,44 @@ const CreateCouponDialog = ({openCouponDialog, handleCouponDialogClose}) => {
         }
     });
 
+    const dispatch = useDispatch();
     const classes = useStyles();
 
     const [coupon, setCoupon] = useState({});
     const [error, setError] = useState({});
+    const {token} = useSelector(state => state.auth);
 
     const handleSubmit = event => {
         event.preventDefault();
 
-        if(!coupon.code){
+        if (!coupon.code) {
             setError({...error, code: 'Field required'});
             return;
-        }else {
+        } else {
             setError({...error, code: null});
         }
 
-        if(!coupon.percentage){
+        if (!coupon.percentage) {
             setError({...error, percentage: 'Field required'});
             return;
-        }else {
+        } else {
             setError({...error, percentage: null});
         }
 
-        if(!coupon.startDate){
+        if (!coupon.startDate) {
             setError({...error, startDate: 'Field required'});
             return;
-        }else {
+        } else {
             setError({...error, startDate: null});
         }
 
-        if(!coupon.endDate){
+        if (!coupon.endDate) {
             setError({...error, endDate: 'Field required'});
             return;
-        }else {
+        } else {
             setError({...error, endDate: null});
         }
-
+        dispatch(createCoupon(coupon, token));
         handleCouponDialogClose();
     }
 
@@ -129,8 +133,8 @@ const CreateCouponDialog = ({openCouponDialog, handleCouponDialogClose}) => {
                         className={classes.textField}
                         emptyLabel="Select Start Date"
                         onChange={handleStartDateChange}
-                        minDate={Date.now()}
                         variant="dialog"
+                        name="startDate"
                         fullWidth={true}
                         margin="normal"
                         label="Start Date"
@@ -143,12 +147,18 @@ const CreateCouponDialog = ({openCouponDialog, handleCouponDialogClose}) => {
                         className={classes.textField}
                         onChange={handleEndDateChange}
                         variant="dialog"
+                        name="endDate"
                         fullWidth={true}
                         margin="normal"
                         label="End Date"
                     />
 
-                    <Button color="secondary"  variant="contained" fullWidth={true} className={classes.submitButton}>
+                    <Button
+                        onClick={handleSubmit}
+                        color="secondary"
+                        variant="contained"
+                        fullWidth={true}
+                        className={classes.submitButton}>
                         Create Coupon
                     </Button>
                 </form>

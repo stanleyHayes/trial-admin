@@ -41,7 +41,7 @@ const MobileHeader = ({handleDrawerOpen}) => {
                     <Hamburger color="secondary" onClick={handleDrawerOpen} className={classes.menu}/>
                 </Grid>
                 <Grid item={true} xs={9} container={true} justifyContent="flex-start">
-                    <Typography className={classes.brand} color="textPrimary" variant="h6">VienHealth</Typography>
+                    <Typography className={classes.brand} color="secondary" variant="h6">VienHealth</Typography>
                 </Grid>
                 <Grid item={true} xs={1}>
                     <MoreHoriz color="secondary" onClick={handleMoreClick}/>
