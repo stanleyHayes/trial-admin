@@ -39,7 +39,7 @@ const CreateCouponDialog = ({openCouponDialog, handleCouponDialogClose}) => {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const [coupon, setCoupon] = useState({});
+    const [coupon, setCoupon] = useState({startDate: Date.now(), endDate: Date.now()});
     const [error, setError] = useState({});
     const {token} = useSelector(state => state.auth);
 

@@ -29,7 +29,7 @@ import moment from "moment";
 import CreateCouponDialog from "../../components/modals/coupons/create-coupon-dialog";
 import DeleteDialog from "../../components/shared/delete-dialog";
 import ViewCouponDetailDialog from "../../components/modals/coupons/view-coupon-detail-dialog";
-import {getCoupons} from "../../redux/coupons/coupons-action-creators";
+import {deleteCoupon, getCoupons} from "../../redux/coupons/coupons-action-creators";
 import UpdateCouponDialog from "../../components/modals/coupons/update-coupon-dialog";
 import {useHistory} from "react-router-dom";
 
@@ -67,6 +67,18 @@ const CouponsPage = () => {
             usedIcon: {
                 color: brown['600'],
                 cursor: 'pointer'
+            },
+            status: {
+                color: green['600']
+            },
+            expired: {
+                color: brown['600']
+            },
+            deleted: {
+                color: red['600']
+            },
+            inactive: {
+                color: grey['600']
             }
         }
     });
@@ -100,6 +112,7 @@ const CouponsPage = () => {
 
     const handleDelete = () => {
         if (selectedID !== "") {
+            dispatch(deleteCoupon(selectedID, token));
             handleDeleteDialogClose();
         }
     }
@@ -163,6 +176,21 @@ const CouponsPage = () => {
         }
     }, [history, authLoading, token]);
 
+    const renderStatus = status => {
+        switch (status) {
+            case 'active':
+                return <Typography className={classes.active} variant="body2">{status}</Typography>
+            case 'inactive':
+                return <Typography className={classes.inactive} variant="body2">{status}</Typography>
+            case 'expired':
+                return <Typography className={classes.expired} variant="body2">{status}</Typography>
+            case 'deleted':
+                return <Typography className={classes.deleted} variant="body2">{status}</Typography>
+            default:
+                return <Typography className={classes.active} variant="body2">{status}</Typography>
+        }
+    }
+
     return (
         <Layout>
             <Container className={classes.container}>
@@ -208,7 +236,6 @@ const CouponsPage = () => {
                 </Grid>
 
                 <Divider className={classes.divider} variant="fullWidth"/>
-                {loading && <LinearProgress variant="query"/>}
                 {coupons && coupons.length === 0 ? (
                     <Box>
                         <Typography color="textSecondary" align="center" variant="h6" className={classes.empty}>
@@ -237,7 +264,9 @@ const CouponsPage = () => {
                                             <TableCell>{index + 1}</TableCell>
                                             <TableCell>{coupon.code}</TableCell>
                                             <TableCell>{coupon.percentage}%</TableCell>
-                                            <TableCell>{coupon.status}</TableCell>
+                                            <TableCell>
+                                                {renderStatus(coupon.status)}
+                                            </TableCell>
                                             <TableCell>{moment(coupon.startDate).fromNow()}</TableCell>
                                             <TableCell>{moment(coupon.endDate).fromNow()}</TableCell>
                                             <TableCell>{moment(coupon.createdAt).fromNow()}</TableCell>
