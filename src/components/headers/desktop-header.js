@@ -8,14 +8,14 @@ const DesktopHeader = () => {
     const useStyles = makeStyles(theme => {
         return {
             toolbar: {},
-            profileButton: {
-
-            },
+            profileButton: {},
             brand: {
                 textTransform: 'uppercase'
             },
             link: {
-                textDecoration: 'none'
+                textDecoration: 'none',
+                display: 'block',
+                width: '100%'
             },
             avatar: {
                 backgroundColor: theme.palette.secondary.main
@@ -78,7 +78,7 @@ const DesktopHeader = () => {
                             </Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link to="/dashboard" className={classes.link}>
+                            <Link to="/" className={classes.link}>
                                 <Button variant="text" startIcon={<Dashboard/>}>
                                     Dashboard
                                 </Button>
@@ -99,9 +99,11 @@ const DesktopHeader = () => {
                             </Link>
                         </MenuItem>
                         <MenuItem>
-                            <Button variant="text" startIcon={<ExitToApp/>}>
-                                Logout
-                            </Button>
+                            <Link to="/auth/login" className={classes.link}>
+                                <Button variant="text" startIcon={<ExitToApp/>}>
+                                    Logout
+                                </Button>
+                            </Link>
                         </MenuItem>
                     </Menu>
                 </Grid>

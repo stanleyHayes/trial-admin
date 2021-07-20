@@ -38,7 +38,6 @@ const LoginPage = () => {
                 marginBottom: 8,
                 paddingBottom: 16,
                 paddingTop: 16,
-                backgroundColor: theme.palette.primary.main
             },
             link: {
                 textDecoration: 'none'
@@ -63,7 +62,10 @@ const LoginPage = () => {
             logo: {
                 width: 100,
                 height: 100
-            }
+            },
+            subtitle:{
+                marginBottom: 16
+            },
         }
     });
 
@@ -112,9 +114,9 @@ const LoginPage = () => {
             <Container className={classes.gridContainer}>
                 <Grid container={true} justifyContent="center" alignItems="center">
                     <Grid item={true}>
-                        <Avatar className={classes.logo} variant="rounded">
+                        <div className={classes.logo}>
                             <img className={classes.image} alt="logo" src="/images/logo.png"/>
-                        </Avatar>
+                        </div>
                     </Grid>
                 </Grid>
                 <Typography
@@ -123,12 +125,20 @@ const LoginPage = () => {
                     align="center"
                     gutterBottom={true}
                     variant="h4">
-                    Darkdocs Shop
+                    VienHealth
+                </Typography>
+                <Typography
+                    color="textPrimary"
+                    className={classes.subtitle}
+                    align="center"
+                    gutterBottom={true}
+                    variant="h6">
+                    Better from start
                 </Typography>
 
                 <Grid container={true} justifyContent="center" alignItems='center'>
                     <Grid item={true} xs={12} md={4}>
-                        <Card elevation={4}>
+                        <Card elevation={1}>
                             {loading && <LinearProgress variant="query"/>}
                             <CardContent>
                                 {authError &&
@@ -157,7 +167,7 @@ const LoginPage = () => {
                                         fullWidth={true}
                                     />
 
-                                    <Grid container={true} spacing={2} alignItems="center">
+                                    <Grid container={true} spacing={1} alignItems="center">
                                         <Grid item={true}>
                                             <Checkbox checked={visible} onChange={handleShowPassword}/>
                                         </Grid>
@@ -182,7 +192,7 @@ const LoginPage = () => {
                                     />
 
                                     <Link className={classes.link} to="/auth/forgot-password">
-                                        <Button fullWidth={true} variant="text" size="small">
+                                        <Button fullWidth={true} variant="text" size="large">
                                             Forgot Password?
                                         </Button>
                                     </Link>
@@ -193,16 +203,11 @@ const LoginPage = () => {
                                         onClick={handleSubmit}
                                         fullWidth={true}
                                         className={classes.button}
-                                        variant="outlined"
-                                        size="small">
+                                        variant="contained"
+                                        color="primary"
+                                        size="large">
                                         Login
                                     </Button>
-
-                                    <Link className={classes.link} to="/auth/register">
-                                        <Button fullWidth={true} variant="text" size="small">
-                                            Don't have an account? Register
-                                        </Button>
-                                    </Link>
                                 </form>
                             </CardContent>
                         </Card>

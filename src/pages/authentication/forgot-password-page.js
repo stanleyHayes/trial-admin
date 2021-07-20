@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Avatar, Button, Card, CardContent, Grid, LinearProgress, TextField, Typography} from "@material-ui/core";
+import {Button, Card, CardContent, Grid, LinearProgress, TextField, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/styles";
 import {Link, useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -26,7 +26,6 @@ const ForgotPasswordPage = () => {
                 marginBottom: 8,
                 paddingTop: 16,
                 paddingBottom: 16,
-                backgroundColor: theme.palette.primary.main
             },
             link: {
                 textDecoration: 'none'
@@ -39,8 +38,11 @@ const ForgotPasswordPage = () => {
                 flexDirection: 'column'
             },
             title: {
-                marginTop: 32,
-                marginBottom: 32
+                marginTop: 16,
+                marginBottom: 16
+            },
+            subtitle:{
+                marginBottom: 16
             },
             image: {
                 maxHeight: '100%',
@@ -85,9 +87,9 @@ const ForgotPasswordPage = () => {
             <Grid className={classes.gridContainer}>
                 <Grid container={true} justifyContent="center" alignItems="center">
                     <Grid item={true}>
-                        <Avatar className={classes.logo} variant="rounded">
+                        <div className={classes.logo}>
                             <img className={classes.image} alt="logo" src="/images/logo.png"/>
-                        </Avatar>
+                        </div>
                     </Grid>
                 </Grid>
                 <Typography
@@ -96,11 +98,19 @@ const ForgotPasswordPage = () => {
                     align="center"
                     gutterBottom={true}
                     variant="h4">
-                    Darkdocs Shop
+                    VienHealth
+                </Typography>
+                <Typography
+                    color="textPrimary"
+                    className={classes.subtitle}
+                    align="center"
+                    gutterBottom={true}
+                    variant="h6">
+                    Better from start
                 </Typography>
                 <Grid container={true} justifyContent="center" alignItems='center'>
                     <Grid item={true} xs={12} md={4}>
-                        <Card variant="elevation" elevation={4}>
+                        <Card variant="elevation" elevation={1}>
                             {loading && <LinearProgress variant="query"/>}
                             <CardContent>
                                 {authError && <Typography variant="body2" color="error" align="center">
@@ -134,16 +144,17 @@ const ForgotPasswordPage = () => {
                                     <Button
                                         disabled={loading}
                                         type="submit"
+                                        color="primary"
                                         onClick={handleSubmit}
                                         fullWidth={true}
                                         className={classes.button}
-                                        variant="outlined"
-                                        size="small">
+                                        variant="contained"
+                                        size="large">
                                         Continue
                                     </Button>
 
                                     <Link className={classes.link} to="/auth/login">
-                                        <Button fullWidth={true} variant="text" size="small">
+                                        <Button fullWidth={true} variant="text" size="large">
                                             Go back to login
                                         </Button>
                                     </Link>

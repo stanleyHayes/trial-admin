@@ -38,7 +38,6 @@ const ChangePasswordPage = () => {
                 marginBottom: 8,
                 paddingTop: 16,
                 paddingBottom: 16,
-                backgroundColor: theme.palette.primary.main
             },
             link: {
                 textDecoration: 'none'
@@ -114,7 +113,7 @@ const ChangePasswordPage = () => {
         <Layout>
             <Container className={classes.container}>
                 <Grid className={classes.gridContainer} container={true} justifyContent="center" alignItems='center'>
-                    <Grid item={true} xs={12} md={6}>
+                    <Grid item={true} xs={12} md={4}>
                         <Card variant="elevation" elevation={1}>
                             {loading && <LinearProgress variant="query"/>}
                             <CardContent>
@@ -200,11 +199,12 @@ const ChangePasswordPage = () => {
                                     <Button
                                         disabled={loading}
                                         type="submit"
+                                        color="primary"
                                         onClick={handleSubmit}
                                         fullWidth={true}
                                         className={classes.button}
-                                        variant="outlined"
-                                        size="small">
+                                        variant="contained"
+                                        size="large">
                                         Change Password
                                     </Button>
                                 </form>

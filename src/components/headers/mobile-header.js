@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Grid, makeStyles, Toolbar, Menu, MenuItem, Typography, Button} from "@material-ui/core";
+import {Button, Grid, makeStyles, Menu, MenuItem, Toolbar, Typography} from "@material-ui/core";
 import {Dashboard, Edit, ExitToApp, Face, Lock, Menu as Hamburger, MoreHoriz} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 
@@ -10,7 +10,9 @@ const MobileHeader = ({handleDrawerOpen}) => {
             toolbar: {},
             menu: {},
             link: {
-                textDecoration: 'none'
+                textDecoration: 'none',
+                display: 'block',
+                width: '100%'
             },
             brand: {
                 textTransform: 'uppercase'
@@ -56,7 +58,7 @@ const MobileHeader = ({handleDrawerOpen}) => {
                             </Link>
                         </MenuItem>
                         <MenuItem>
-                            <Link to="/dashboard" className={classes.link}>
+                            <Link to="/" className={classes.link}>
                                 <Button variant="text" startIcon={<Dashboard/>}>
                                     Dashboard
                                 </Button>
@@ -77,9 +79,11 @@ const MobileHeader = ({handleDrawerOpen}) => {
                             </Link>
                         </MenuItem>
                         <MenuItem>
-                            <Button variant="text" startIcon={<ExitToApp/>}>
-                                Logout
-                            </Button>
+                            <Link to="/auth/login" className={classes.link}>
+                                <Button variant="text" startIcon={<ExitToApp/>}>
+                                    Logout
+                                </Button>
+                            </Link>
                         </MenuItem>
                     </Menu>
                 </Grid>

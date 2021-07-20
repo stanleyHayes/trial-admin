@@ -128,7 +128,15 @@ const ResetPasswordPage = () => {
                     align="center"
                     gutterBottom={true}
                     variant="h4">
-                    Darkdocs Shop
+                    VienHealth
+                </Typography>
+                <Typography
+                    color="textSecondary"
+                    className={classes.subtitle}
+                    align="center"
+                    gutterBottom={true}
+                    variant="h6">
+                    Better from start
                 </Typography>
 
                 <Grid container={true} justifyContent="center" alignItems='center'>
