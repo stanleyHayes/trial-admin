@@ -78,7 +78,8 @@ const CouponsPage = () => {
 
     useEffect(() => {
         dispatch(getCoupons(token));
-    })
+    }, [dispatch, token]);
+
     const {coupons, loading, error} = useSelector(state => state.coupons);
 
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -157,7 +158,7 @@ const CouponsPage = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if(!authLoading && !token){
+        if (!authLoading && !token) {
             history.push('/auth/login');
         }
     }, [history, authLoading, token]);
@@ -166,7 +167,12 @@ const CouponsPage = () => {
         <Layout>
             <Container className={classes.container}>
                 {loading && <LinearProgress variant="query"/>}
-                {error && <Alert variant="outlined" title="Error">{error}</Alert>}
+                {error && <Alert
+                    severity="error"
+                    variant="outlined"
+                    title="Error">
+                    {error}
+                </Alert>}
                 <Grid container={true} justifyContent="space-between" alignItems="center" spacing={3}>
                     <Grid item={true} xs={12} md={4} lg={8}>
                         <Typography className={classes.title} color="textSecondary" variant="h4">
@@ -202,7 +208,7 @@ const CouponsPage = () => {
                 </Grid>
 
                 <Divider className={classes.divider} variant="fullWidth"/>
-
+                {loading && <LinearProgress variant="query"/>}
                 {coupons && coupons.length === 0 ? (
                     <Box>
                         <Typography color="textSecondary" align="center" variant="h6" className={classes.empty}>
@@ -220,6 +226,7 @@ const CouponsPage = () => {
                                     <TableCell>Status</TableCell>
                                     <TableCell>Start Date</TableCell>
                                     <TableCell>End Date</TableCell>
+                                    <TableCell>Date Created</TableCell>
                                     <TableCell>Actions</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -233,6 +240,7 @@ const CouponsPage = () => {
                                             <TableCell>{coupon.status}</TableCell>
                                             <TableCell>{moment(coupon.startDate).fromNow()}</TableCell>
                                             <TableCell>{moment(coupon.endDate).fromNow()}</TableCell>
+                                            <TableCell>{moment(coupon.createdAt).fromNow()}</TableCell>
                                             <TableCell>
                                                 <Grid container={true} spacing={1} alignItems="center">
                                                     <Grid item={true}>

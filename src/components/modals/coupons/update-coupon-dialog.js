@@ -10,6 +10,8 @@ import {
     Typography
 } from "@material-ui/core";
 import {DatePicker} from "@material-ui/pickers";
+import {updateCoupon} from "../../../redux/coupons/coupons-action-creators";
+import {useDispatch, useSelector} from "react-redux";
 
 const UpdateCouponDialog = ({openUpdateCouponDialog, handleUpdateCouponDialogClose, originalCoupon}) => {
 
@@ -35,36 +37,60 @@ const UpdateCouponDialog = ({openUpdateCouponDialog, handleUpdateCouponDialogClo
     });
 
     const classes = useStyles();
+    const dispatch = useDispatch();
+
+    const {token} = useSelector(state => state.auth);
 
     const [coupon, setCoupon] = useState({...originalCoupon});
     const [error, setError] = useState({});
 
     const handleSubmit = event => {
         event.preventDefault();
+        const updatedCoupon = {};
+        if(coupon.code !== originalCoupon.code){
+            updatedCoupon['code'] = coupon.code;
+        }
 
-        if(!coupon.code){
+        if(coupon.code !== originalCoupon.code && !coupon.code){
             setError({...error, code: 'Field required'});
+            return;
         }else {
             setError({...error, code: null});
         }
 
-        if(!coupon.percentage){
+        if(coupon.percentage !== originalCoupon.percentage){
+            updatedCoupon['percentage'] = coupon.percentage;
+        }
+
+        if(coupon.percentage !== originalCoupon.percentage && !coupon.percentage){
             setError({...error, percentage: 'Field required'});
+            return;
         }else {
             setError({...error, percentage: null});
         }
 
-        if(!coupon.startDate){
+        if(coupon.startDate !== originalCoupon.startDate){
+            updatedCoupon['startDate'] = coupon.startDate;
+        }
+
+        if(coupon.startDate !== originalCoupon.startDate &&!coupon.startDate){
             setError({...error, startDate: 'Field required'});
+            return;
         }else {
             setError({...error, startDate: null});
         }
 
-        if(!coupon.endDate){
+        if(coupon.endDate !== originalCoupon.endDate){
+            updatedCoupon['endDate'] = coupon.endDate;
+        }
+
+        if(coupon.endDate !== originalCoupon.endDate &&!coupon.endDate){
             setError({...error, endDate: 'Field required'});
+            return;
         }else {
             setError({...error, endDate: null});
         }
+        dispatch(updateCoupon(originalCoupon._id, updatedCoupon, token));
         handleUpdateCouponDialogClose();
     }
 
@@ -127,6 +153,8 @@ const UpdateCouponDialog = ({openUpdateCouponDialog, handleUpdateCouponDialogClo
                         fullWidth={true}
                         margin="normal"
                         label="Start Date"
+                        helperText={error.startDate}
+                        error={Boolean(error.startDate)}
                     />
 
                     <DatePicker
@@ -139,9 +167,11 @@ const UpdateCouponDialog = ({openUpdateCouponDialog, handleUpdateCouponDialogClo
                         fullWidth={true}
                         margin="normal"
                         label="End Date"
+                        error={Boolean(error.endDate)}
+                        helperText={error.endDate}
                     />
 
-                    <Button variant="contained" color="secondary" fullWidth={true} className={classes.submitButton}>
+                    <Button onClick={handleSubmit} variant="contained" color="secondary" fullWidth={true} className={classes.submitButton}>
                         Update Coupon
                     </Button>
                 </form>
