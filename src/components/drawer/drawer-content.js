@@ -17,7 +17,10 @@ const DrawerContent = () => {
                 fontWeight: 'bold'
             },
             root: {
-                paddingTop: 84
+                paddingTop: 84,
+                [theme.breakpoints.down('sm')]: {
+                    paddingTop: 32
+                }
             }
         }
     });
